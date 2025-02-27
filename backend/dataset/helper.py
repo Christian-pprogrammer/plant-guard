@@ -29,7 +29,12 @@ os.makedirs(rw_metadata_dir, exist_ok=True)
 
 # Create directories for each disease class
 for disease in disease_classes:
-    os.makedirs(os.path.join(image_dir, disease), exist_ok=True)
+    # Clean up disease name for directory name
+    dir_name = re.sub(r'[\s\(\)\[\]\{\},]', '_', disease)
+    dir_name = re.sub(r'_+', '_', dir_name)  # Replace multiple underscores with single one
+    dir_name = dir_name.strip('_')  # Remove leading/trailing underscores
+    
+    os.makedirs(os.path.join(image_dir, dir_name), exist_ok=True)
 
 # Copy and organize images
 source_image_dir = './SVMTrain/SVMTrain'
@@ -39,8 +44,13 @@ for _, row in df.iterrows():
     image1 = row['name_1']
     image2 = row['name_2']
     
+    # Clean up disease name for directory name
+    dir_name = re.sub(r'[\s\(\)\[\]\{\},]', '_', disease_class)
+    dir_name = re.sub(r'_+', '_', dir_name)  # Replace multiple underscores with single one
+    dir_name = dir_name.strip('_')  # Remove leading/trailing underscores
+    
     # Create destination paths
-    dest_dir = os.path.join(image_dir, disease_class)
+    dest_dir = os.path.join(image_dir, dir_name)
     
     # Copy images (if they exist)
     try:
@@ -113,7 +123,12 @@ for disease in disease_classes:
 # Generate train/validation/test splits
 all_image_paths = []
 for disease in disease_classes:
-    disease_dir = os.path.join(image_dir, disease)
+    # Clean up disease name for directory name
+    dir_name = re.sub(r'[\s\(\)\[\]\{\},]', '_', disease)
+    dir_name = re.sub(r'_+', '_', dir_name)  # Replace multiple underscores with single one
+    dir_name = dir_name.strip('_')  # Remove leading/trailing underscores
+    
+    disease_dir = os.path.join(image_dir, dir_name)
     image_paths = [os.path.join(disease_dir, img) for img in os.listdir(disease_dir) if img.endswith('.JPG')]
     all_image_paths.extend([(img_path, disease) for img_path in image_paths])
 

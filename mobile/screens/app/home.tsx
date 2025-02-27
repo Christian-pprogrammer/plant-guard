@@ -13,6 +13,7 @@ import Help from "../components/help";
 import FixedBottomSheetModal from "../components/fixed-bottomsheet";
 import { BottomSheetModal, BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import ImageUpload from "../components/image-upload";
 
 const HomePage = ({ navigation }:any) => {
   const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
@@ -26,11 +27,21 @@ const HomePage = ({ navigation }:any) => {
   const snapPoints = useMemo(() => ['80%'], []);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
+  const snapPoints2 = useMemo(() => ['100%'], []);
+  const bottomSheetModalRef2 = useRef<BottomSheetModal>(null);
+
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
   const handleCloseModal = () => {
     bottomSheetModalRef.current?.close();
+  };
+
+  const handlePresentModalPress2 = useCallback(() => {
+    bottomSheetModalRef2.current?.present();
+  }, []);
+  const handleCloseModal2 = () => {
+    bottomSheetModalRef2.current?.close();
   };
 
   const handleUpload = async()=>{
@@ -95,10 +106,16 @@ const HomePage = ({ navigation }:any) => {
           qualityPrioritization: "balanced"
         });
         console.log("Photo captured:", photo.path);
-        // Alert.alert("Success", "Photo captured successfully!");
-        navigation.navigate("Results", {
-          image: photo.path
+        setImage({
+          uri: photo.path,
+          name: photo?.name,
+          type: '.png'
         })
+        handlePresentModalPress2()
+        // Alert.alert("Success", "Photo captured successfully!");
+        // navigation.navigate("Results", {
+        //   image: photo.path
+        // })
       } catch (error) {
         console.error("Error taking photo:", error);
         Alert.alert("Error", "Failed to capture photo. Please try again.");
@@ -251,6 +268,7 @@ onPress={()=>{
         </TouchableRipple>
       </View>
 
+      <FixedBottomSheetModal noScroll={true} handleComponent={null} snapPoints={snapPoints2} children={<ImageUpload image={image} onClose={handleCloseModal2}></ImageUpload>} bottomSheetModalRef={bottomSheetModalRef2}></FixedBottomSheetModal>
       <FixedBottomSheetModal noScroll={true} handleComponent={null} snapPoints={snapPoints} children={<Help onClose={handleCloseModal}></Help>} bottomSheetModalRef={bottomSheetModalRef}></FixedBottomSheetModal>
     </View>
     </BottomSheetModalProvider>

@@ -94,9 +94,11 @@ const HomePage = ({ navigation }:any) => {
           flash: flash === "on" ? "on" : "off",
           qualityPrioritization: "balanced"
         });
-        
         console.log("Photo captured:", photo.path);
-        Alert.alert("Success", "Photo captured successfully!");
+        // Alert.alert("Success", "Photo captured successfully!");
+        navigation.navigate("Results", {
+          image: photo.path
+        })
       } catch (error) {
         console.error("Error taking photo:", error);
         Alert.alert("Error", "Failed to capture photo. Please try again.");

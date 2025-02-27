@@ -27,6 +27,7 @@ import 'react-native-url-polyfill/auto';
 import 'react-native-get-random-values';
 import './types/global.d.ts';
 import HomePage from './screens/app/home.tsx';
+import Results from './screens/app/results.tsx';
 
 function App(): React.JSX.Element {
   const navigationRef: any = useRef<any>();
@@ -64,6 +65,11 @@ function App(): React.JSX.Element {
               name="HomePage"
               component={HomePage}
               options={{title: 'HomePage'}}
+            />
+               <Stack.Screen
+              name="Results"
+              component={Results}
+              options={{title: 'Results'}}
             />
           </Stack.Navigator>
         </NavigationContainer>

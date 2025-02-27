@@ -8,16 +8,10 @@ import {
     View,
   } from 'react-native';
   import {ScrollView} from 'react-native';
-  import {TouchableOpacity} from 'react-native';
-  import Ionicons from 'react-native-vector-icons/Ionicons';
-  import {useEffect, useMemo, useState} from 'react';
-  import {RadioButton, TouchableRipple} from 'react-native-paper';
-  import CustomText from '../components/custom-text';
-  import {Image} from 'react-native';
-  import {useIsFocused} from '@react-navigation/native';
-  import AsyncStorage from '@react-native-async-storage/async-storage';
   import {SafeAreaView} from 'react-native-safe-area-context';
 import React from 'react';
+import CustomButton from '../components/custom-button';
+import AntDesign from 'react-native-vector-icons/AntDesign';
   
   const Results = ({route, navigation}: any) => {
   
@@ -59,15 +53,11 @@ import React from 'react';
                 backgroundColor: 'white',
               }}>
               <CustomButton
-                title={t('VehicleInfo.Done')}
-                disabled={!showDoneIcon}
+              leftIcon={<AntDesign color={'white'} name='camera' size={24}/>}
+                title={"Retake"}
                 classNames={'pt-3 pb-4 rounded-full'}
                 onPress={() => {
-                  if (selectedVehicles?.length > 0) {
-                    navigation.navigate(route?.params?.returnUrl, {
-                      selectedVehicles: selectedVehicles,
-                    });
-                  }
+                 navigation.goBack();
                 }}
               />
             </View>

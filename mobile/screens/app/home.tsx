@@ -112,10 +112,6 @@ const HomePage = ({ navigation }:any) => {
           type: '.png'
         })
         handlePresentModalPress2()
-        // Alert.alert("Success", "Photo captured successfully!");
-        // navigation.navigate("Results", {
-        //   image: photo.path
-        // })
       } catch (error) {
         console.error("Error taking photo:", error);
         Alert.alert("Error", "Failed to capture photo. Please try again.");
@@ -268,7 +264,7 @@ onPress={()=>{
         </TouchableRipple>
       </View>
 
-      <FixedBottomSheetModal noScroll={true} handleComponent={null} snapPoints={snapPoints2} children={<ImageUpload image={image} onClose={handleCloseModal2}></ImageUpload>} bottomSheetModalRef={bottomSheetModalRef2}></FixedBottomSheetModal>
+      <FixedBottomSheetModal noScroll={true} handleComponent={null} snapPoints={snapPoints2} children={<ImageUpload navigation={navigation} image={image} onClose={handleCloseModal2}></ImageUpload>} bottomSheetModalRef={bottomSheetModalRef2}></FixedBottomSheetModal>
       <FixedBottomSheetModal noScroll={true} handleComponent={null} snapPoints={snapPoints} children={<Help onClose={handleCloseModal}></Help>} bottomSheetModalRef={bottomSheetModalRef}></FixedBottomSheetModal>
     </View>
     </BottomSheetModalProvider>

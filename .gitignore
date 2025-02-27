@@ -8,5 +8,5 @@
 **/.idea/
 
 # add backend/dataset/plantGuard and backend/dataset/SVMTrain to .gitignore
-backend/dataset/plantGuard/
+backend/dataset/plantGuard_dataset/
 backend/dataset/SVMTrain/

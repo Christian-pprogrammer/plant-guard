@@ -62,6 +62,12 @@ for disease in disease_classes:
     # Clean up disease name for display
     clean_name = re.sub(r'[_]', ' ', disease).replace('___', ' - ')
     
+    # Create a filename-friendly version of the disease name 
+    # Replace spaces and special characters with underscores
+    filename = re.sub(r'[\s\(\)\[\]\{\}]', '_', disease)
+    filename = re.sub(r'_+', '_', filename)  # Replace multiple underscores with single one
+    filename = filename.strip('_')  # Remove leading/trailing underscores
+    
     # English metadata template
     en_metadata = {
         "name": clean_name,
@@ -79,8 +85,8 @@ for disease in disease_classes:
         ]
     }
     
-    # Save English metadata
-    with open(os.path.join(en_metadata_dir, f"{disease}.json"), 'w') as f:
+    # Save English metadata with uniform filename
+    with open(os.path.join(en_metadata_dir, f"{filename}.json"), 'w') as f:
         json.dump(en_metadata, f, indent=4)
     
     # Kinyarwanda metadata template (to be translated)
@@ -100,8 +106,8 @@ for disease in disease_classes:
         ]
     }
     
-    # Save Kinyarwanda metadata
-    with open(os.path.join(rw_metadata_dir, f"{disease}.json"), 'w') as f:
+    # Save Kinyarwanda metadata with the same uniform filename
+    with open(os.path.join(rw_metadata_dir, f"{filename}.json"), 'w') as f:
         json.dump(rw_metadata, f, indent=4)
 
 # Generate train/validation/test splits

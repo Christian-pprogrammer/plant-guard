@@ -2,6 +2,9 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import os
+
+os.chdir('../dataset/plantGuard_dataset')
 
 IMG_HEIGHT, IMG_WIDTH = 224, 224
 BATCH_SIZE = 32
@@ -21,7 +24,7 @@ train_datagen = ImageDataGenerator(
 
 # Flow from disease directories
 train_disease_generator = train_datagen.flow_from_directory(
-    'dataset/diseases',
+    'images',
     target_size=(IMG_HEIGHT, IMG_WIDTH),
     batch_size=BATCH_SIZE,
     class_mode='categorical',
@@ -29,7 +32,7 @@ train_disease_generator = train_datagen.flow_from_directory(
 )
 
 validation_disease_generator = train_datagen.flow_from_directory(
-    'dataset/diseases',
+    'images',
     target_size=(IMG_HEIGHT, IMG_WIDTH),
     batch_size=BATCH_SIZE,
     class_mode='categorical',

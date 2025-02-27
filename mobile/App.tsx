@@ -28,6 +28,7 @@ import 'react-native-get-random-values';
 import './types/global.d.ts';
 import HomePage from './screens/app/home.tsx';
 import Results from './screens/app/results.tsx';
+import History from './screens/app/history.tsx';
 
 function App(): React.JSX.Element {
   const navigationRef: any = useRef<any>();
@@ -70,6 +71,11 @@ function App(): React.JSX.Element {
               name="Results"
               component={Results}
               options={{title: 'Results'}}
+            />
+                <Stack.Screen
+              name="History"
+              component={History}
+              options={{title: 'History'}}
             />
           </Stack.Navigator>
         </NavigationContainer>

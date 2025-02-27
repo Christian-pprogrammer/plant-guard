@@ -200,7 +200,9 @@ const HomePage = ({ navigation }:any) => {
         <TouchableRipple borderless className="rounded-full" onPress={()=>{}} style={styles.iconButton}>
           <Feather name="user" size={28} color="white" />
         </TouchableRipple>
-        <TouchableRipple borderless className="rounded-full" onPress={()=>{}} style={styles.iconButton}>
+        <TouchableRipple borderless className="rounded-full" onPress={()=>{
+          navigation.navigate("History")
+        }} style={styles.iconButton}>
           <Feather name="box" size={28} color="white" />
         </TouchableRipple>
         </View>

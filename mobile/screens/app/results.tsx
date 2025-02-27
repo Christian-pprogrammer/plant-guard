@@ -71,7 +71,7 @@ const { height } = Dimensions.get('window');
           className="p-[5px] rounded-full flex justify-center items-center"
           borderless
           onPress={() => {
-            navigation.goBack()
+            navigation.navigate("HomePage")
           }}
         >
           <Feather name={"camera"} size={24} color={"white"} />
@@ -138,7 +138,7 @@ const { height } = Dimensions.get('window');
 
       <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'space-between',columnGap: 22}} className='w-full py-5 pb-10 px-[20px] absolute bottom-0 bg-white'>
         <TouchableRipple borderless onPress={()=>{
-            navigation.goBack()
+            navigation.navigate("HomePage")
         }}>
           <View style={{flexDirection: 'column',alignItems: 'center',justifyContent: 'center'}}>
           <Feather name={"camera"} size={24} color={"black"} />

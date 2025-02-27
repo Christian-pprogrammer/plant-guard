@@ -1,0 +1,48 @@
+Total number of disease classes: 38
+Total number of images: 8751
+
+Class distribution:
+Tomato___Tomato_Yellow_Leaf_Curl_Virus: 897 images
+Grape___Black_rot: 187 images
+Blueberry___healthy: 239 images
+Tomato___Bacterial_spot: 297 images
+Pepper,_bell___healthy: 241 images
+Tomato___Late_blight: 291 images
+Tomato___healthy: 224 images
+Squash___Powdery_mildew: 270 images
+Corn_(maize)___healthy: 212 images
+Grape___Esca_(Black_Measles): 233 images
+Cherry_(including_sour)___Powdery_mildew: 181 images
+Tomato___Spider_mites Two-spotted_spider_mite: 300 images
+Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot: 83 images
+Tomato___Tomato_mosaic_virus: 65 images
+Tomato___Target_Spot: 211 images
+Peach___healthy: 74 images
+Tomato___Leaf_Mold: 146 images
+Tomato___Septoria_leaf_spot: 275 images
+Potato___Late_blight: 168 images
+Orange___Haunglongbing_(Citrus_greening): 847 images
+Grape___healthy: 67 images
+Soybean___healthy: 885 images
+Apple___Apple_scab: 111 images
+Apple___healthy: 288 images
+Potato___Early_blight: 153 images
+Corn_(maize)___Common_rust_: 199 images
+Peach___Bacterial_spot: 386 images
+Potato___healthy: 25 images
+Apple___Black_rot: 114 images
+Tomato___Early_blight: 147 images
+Grape___Leaf_blight_(Isariopsis_Leaf_Spot): 159 images
+Strawberry___Leaf_scorch: 187 images
+Pepper,_bell___Bacterial_spot: 158 images
+Strawberry___healthy: 84 images
+Apple___Cedar_apple_rust: 39 images
+Corn_(maize)___Northern_Leaf_Blight: 132 images
+Cherry_(including_sour)___healthy: 132 images
+Raspberry___healthy: 44 images
+
+Training set: 6125 images
+Validation set: 1313 images
+Test set: 1313 images
+
+Note: Classes with fewer than 3 samples were added to the training set only.

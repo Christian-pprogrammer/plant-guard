@@ -29,6 +29,7 @@ import './types/global.d.ts';
 import HomePage from './screens/app/home.tsx';
 import Results from './screens/app/results.tsx';
 import History from './screens/app/history.tsx';
+import Login from './screens/auth/login.tsx';
 
 function App(): React.JSX.Element {
   const navigationRef: any = useRef<any>();
@@ -76,6 +77,11 @@ function App(): React.JSX.Element {
               name="History"
               component={History}
               options={{title: 'History'}}
+            />
+               <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{title: 'Login'}}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -197,7 +197,9 @@ const HomePage = ({ navigation }:any) => {
         borderless className="rounded-full" style={styles.iconButton}>
           <Icon name={flash === "off" ? "flash-off" : "flash"} size={28} color={flash =='on'? 'yellow' : "white"} />
         </TouchableRipple>
-        <TouchableRipple borderless className="rounded-full" onPress={()=>{}} style={styles.iconButton}>
+        <TouchableRipple borderless className="rounded-full" onPress={()=>{
+          navigation.navigate("Login")
+        }} style={styles.iconButton}>
           <Feather name="user" size={28} color="white" />
         </TouchableRipple>
         <TouchableRipple borderless className="rounded-full" onPress={()=>{

@@ -6,3 +6,7 @@
 
 **/.vscode/
 **/.idea/
+
+# add backend/dataset/plantGuard and backend/dataset/SVMTrain to .gitignore
+backend/dataset/plantGuard/
+backend/dataset/SVMTrain/

@@ -11,5 +11,5 @@
 backend/dataset/plantGuard_dataset/
 backend/dataset/SVMTrain/
 
-**/*.jpg
-**/*.JPG
+*.jpg
+*.JPG

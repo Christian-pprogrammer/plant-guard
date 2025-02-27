@@ -10,3 +10,6 @@
 # add backend/dataset/plantGuard and backend/dataset/SVMTrain to .gitignore
 backend/dataset/plantGuard_dataset/
 backend/dataset/SVMTrain/
+
+**/*.jpg
+**/*.JPG

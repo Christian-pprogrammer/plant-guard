@@ -1,39 +1,29 @@
-from flask import Flask, request, jsonify, send_file
-import os
-from werkzeug.utils import secure_filename
+from flask import Flask, jsonify
+from api.uploadFile import upload_image  
+from api.displayFile import display_image  
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'static/uploads'
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route('/')
 def welcome():
+    """
+    A simple welcome route to check the API status.
+    """
     return jsonify({"message": "Welcome to the Flask API!"})
 
 @app.route('/upload', methods=['POST'])
-def upload_image():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file part in the request"}), 400
-    
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({"error": "No file selected"}), 400
-    
-    if file:
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(UPLOAD_FOLDER, filename)
-        file.save(filepath)
-        return jsonify({"message": "File successfully uploaded", "filename": filename})
-    
-    return jsonify({"error": "File upload failed"}), 500
+def upload():
+    """
+    Route to upload an image by calling the upload_image function from upload.py.
+    """
+    return upload_image()
 
 @app.route('/display/<filename>', methods=['GET'])
-def display_image(filename):
-    filepath = os.path.join(UPLOAD_FOLDER, filename)
-    if os.path.exists(filepath):
-        return send_file(filepath, mimetype='image/jpeg')
-    else:
-        return jsonify({"error": "File not found"}), 404
+def display(filename):
+    """
+    Route to display an image by calling the display_image function from display.py.
+    """
+    return display_image(filename)
 
 if __name__ == '__main__':
     app.run(debug=True)

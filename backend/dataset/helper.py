@@ -64,7 +64,7 @@ for disease in disease_classes:
     
     # Create a filename-friendly version of the disease name 
     # Replace spaces and special characters with underscores
-    filename = re.sub(r'[\s\(\)\[\]\{\}]', '_', disease)
+    filename = re.sub(r'[\s\(\)\[\]\{\},]', '_', disease)
     filename = re.sub(r'_+', '_', filename)  # Replace multiple underscores with single one
     filename = filename.strip('_')  # Remove leading/trailing underscores
     

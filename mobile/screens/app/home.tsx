@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, StyleSheet, Text, Alert, ActivityIndicator, Platform } from "react-native";
+import { View, StyleSheet, Text, Alert, ActivityIndicator, Platform, PermissionsAndroid } from "react-native";
 import { Camera, useCameraDevices } from "react-native-vision-camera";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CustomText from "../components/custom-text";
@@ -7,15 +7,48 @@ import {TouchableRipple} from "react-native-paper"
 import Octicons from "react-native-vector-icons/Octicons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import Feather from "react-native-vector-icons/Feather"
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const HomePage = ({ navigation }:any) => {
   const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
   const [cameraType, setCameraType] = useState("back");
   const [flash, setFlash] = useState("off");
   const devices:any = useCameraDevices()
-
+  const [image, setImage] = useState<any>('')
   const device = devices.filter((d:any) => d.position === cameraType)[0];
   const cameraRef = useRef<any>(null);
+
+  const handleUpload = async()=>{
+    try{
+        const _options: any = {};
+        let result: any = {};
+         result = await launchImageLibrary({..._options,
+              includeBase64: false,
+        });
+    console.log("result",result)
+
+    if (result?.assets?.length > 0) {
+        const {uri, fileName, type} = result?.assets[0];
+
+       setTimeout(() => {
+        ImagePicker.openCropper({
+          mediaType: 'photo',
+          path: uri,
+        }).then((image:any)=>{
+            setImage({
+              uri: image?.path,
+              name: fileName,
+              type: '.png'
+            })
+          })
+        }, 400);
+}
+}
+    catch(error:any){
+        Alert.alert("Error occured",error?.message)
+    }
+}
 
   useEffect(() => {
     const checkPermission = async () => {
@@ -172,7 +205,7 @@ const HomePage = ({ navigation }:any) => {
         borderless
           className="rounded-full p-3"
 onPress={()=>{
-
+  handleUpload()
 }}
         >
           <Octicons name="image" size={30} />

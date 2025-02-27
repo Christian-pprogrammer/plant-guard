@@ -34,7 +34,7 @@ export default function ImageUpload({onClose, image,navigation}:any){
                 navigation.navigate("Results", {
                     image: _image.uri
                   })
-                }, 300);
+                }, 500);
             }, 6000);
         }
         catch(error:any){

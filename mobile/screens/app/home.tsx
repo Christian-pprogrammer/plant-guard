@@ -9,6 +9,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import Feather from "react-native-vector-icons/Feather"
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
+import Help from "../components/help";
 
 const HomePage = ({ navigation }:any) => {
   const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
@@ -225,6 +226,8 @@ onPress={()=>{
           <MaterialIcons name="flip-camera-android" size={30} />
         </TouchableRipple>
       </View>
+
+      <Help />
     </View>
   );
 };

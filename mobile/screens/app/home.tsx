@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { View, StyleSheet, Text, Alert, ActivityIndicator, Platform, PermissionsAndroid } from "react-native";
 import { Camera, useCameraDevices } from "react-native-vision-camera";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -10,6 +10,9 @@ import Feather from "react-native-vector-icons/Feather"
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 import Help from "../components/help";
+import FixedBottomSheetModal from "../components/fixed-bottomsheet";
+import { BottomSheetModal, BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const HomePage = ({ navigation }:any) => {
   const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
@@ -19,6 +22,16 @@ const HomePage = ({ navigation }:any) => {
   const [image, setImage] = useState<any>('')
   const device = devices.filter((d:any) => d.position === cameraType)[0];
   const cameraRef = useRef<any>(null);
+
+  const snapPoints = useMemo(() => ['80%'], []);
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+  const handleCloseModal = () => {
+    bottomSheetModalRef.current?.close();
+  };
 
   const handleUpload = async()=>{
     try{
@@ -134,6 +147,13 @@ const HomePage = ({ navigation }:any) => {
   }
 
   return ( 
+    <GestureHandlerRootView
+    style={{
+      position: 'relative',
+      width: '100%',
+      flex: 1,
+    }}>
+    <BottomSheetModalProvider>
     <View style={styles.container}>
       <Camera
         ref={cameraRef}
@@ -152,7 +172,9 @@ const HomePage = ({ navigation }:any) => {
         </TouchableRipple>
 
         <View style={styles.rightIcons}>
-          <TouchableRipple borderless className="rounded-full" onPress={()=>{}} style={styles.iconButton}>
+          <TouchableRipple borderless className="rounded-full" onPress={()=>{
+            handlePresentModalPress();
+          }} style={styles.iconButton}>
           <Icon name="help-circle-outline" size={28} color="white" />
         </TouchableRipple>
         <TouchableRipple 
@@ -227,8 +249,10 @@ onPress={()=>{
         </TouchableRipple>
       </View>
 
-      <Help />
+      <FixedBottomSheetModal noScroll={true} handleComponent={null} snapPoints={snapPoints} children={<Help onClose={handleCloseModal}></Help>} bottomSheetModalRef={bottomSheetModalRef}></FixedBottomSheetModal>
     </View>
+    </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 };
 

@@ -4,8 +4,10 @@ import { TouchableRipple } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import React from "react";
+import { Instructions } from "../../config/helpers";
+import AntDesign from "react-native-vector-icons/AntDesign"
 
-export default function Help({ onClose,onDone }: any) {
+export default function Help({ onClose }: any) {
 
   return (
     <View
@@ -39,19 +41,26 @@ export default function Help({ onClose,onDone }: any) {
         </TouchableRipple>
       </View>
 
-      <View className="px-[25px] w-full flex-1 flex-col itesm-center justify-center">
+      <View className="px-[20px] w-full flex-col itesm-center justify-center pt-10">
         <CustomText style={{ fontFamily: "EuclidCircularB-Bold" }} className="text-standard font-bold text-[25px] mb-2 text-center">
-          Choose your plan
+       How it works
         </CustomText>
         <CustomText className="text-center text-base text-standard mb-7">
-        Pay only if you’ve earned at least $10
+       Here are instructions about how it works
         </CustomText>
 
+{
+    Instructions?.map((instruction:any)=>{
+        return(
+            <View style={{flexDirection: 'row',columnGap: 10,alignItems: 'center'}} className="mb-3">
+                <AntDesign color={'#00A362'} size={20} name={'checkcircle'}></AntDesign>
+<CustomText className="text-base text-standard">{instruction}</CustomText>
+                </View>
+        )
+    })
+}
+
  
-      </View>
-
-      <View className={`px-[25px] w-full ${Platform.OS == 'ios'? 'pb-10' : 'pb-20'}`}>
-
       </View>
     </View>
   );

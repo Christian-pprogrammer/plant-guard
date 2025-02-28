@@ -56,7 +56,7 @@ def predict_plant_and_disease(image_path):
 def fetch_disease_by_name(disease_name):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     disease_data_path = os.path.join(current_dir, 'plant_diseases.json')
-    with open('plant_diseases.json', 'r') as file:
+    with open(disease_data_path, 'r') as file:
         data = json.load(file)
 
     for disease in data['diseases']:

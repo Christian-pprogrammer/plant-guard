@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: Flask API with Swagger
+  description: API documentation for the authentication and file upload endpoints.
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:5000
+    description: Local server
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      description: Creates a new user in the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                mobileNumber:
+                  type: string
+                location:
+                  type: string
+                password:
+                  type: string
+                confirmPassword:
+                  type: string
+      responses:
+        "201":
+          description: User registered successfully
+        "400":
+          description: Bad request
+
+  /auth/login:
+    post:
+      summary: User login
+      description: Authenticates a user and returns a JWT token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Login successful
+        "400":
+          description: Invalid credentials
+
+  /upload:
+    post:
+      summary: Upload an image
+      description: Uploads an image file to the server.
+      responses:
+        "200":
+          description: File uploaded successfully
+        "400":
+          description: No file selected
+
+  /display/{filename}:
+    get:
+      summary: Display an uploaded image
+      description: Fetches an image by filename.
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Image returned
+        "404":
+          description: File not found

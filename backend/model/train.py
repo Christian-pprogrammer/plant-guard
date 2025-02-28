@@ -2,6 +2,10 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import os
+import json
+
+os.chdir('../dataset/plantGuard_dataset')
 
 IMG_HEIGHT, IMG_WIDTH = 224, 224
 BATCH_SIZE = 32
@@ -21,7 +25,7 @@ train_datagen = ImageDataGenerator(
 
 # Flow from disease directories
 train_disease_generator = train_datagen.flow_from_directory(
-    'dataset/diseases',
+    'images',
     target_size=(IMG_HEIGHT, IMG_WIDTH),
     batch_size=BATCH_SIZE,
     class_mode='categorical',
@@ -29,7 +33,7 @@ train_disease_generator = train_datagen.flow_from_directory(
 )
 
 validation_disease_generator = train_datagen.flow_from_directory(
-    'dataset/diseases',
+    'images',
     target_size=(IMG_HEIGHT, IMG_WIDTH),
     batch_size=BATCH_SIZE,
     class_mode='categorical',
@@ -75,10 +79,14 @@ disease_history = disease_model.fit(
     validation_steps=validation_disease_generator.samples // BATCH_SIZE
 )
 
-# Save the model
-disease_model.save('disease_classifier_model.h5')
-
 # Get the disease class names for later use
 disease_class_names = {v: k for k, v in train_disease_generator.class_indices.items()}
 print(disease_class_names)
 
+os.chdir('../../model')
+
+with open('disease_class_names.json', 'w') as f:
+    json.dump(disease_class_names, f)
+
+# Save the model
+disease_model.save('disease_classifier_model.h5')

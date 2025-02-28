@@ -64,11 +64,21 @@ paths:
     post:
       summary: Upload an image
       description: Uploads an image file to the server.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
       responses:
         "200":
           description: File uploaded successfully
         "400":
-          description: No file selected
+          description: No file selected or invalid file format
 
   /display/{filename}:
     get:

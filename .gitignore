@@ -13,3 +13,24 @@ backend/dataset/SVMTrain/
 
 **/*.jpg
 **/*.JPG
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+backend/*.png
+backend/*.PNG
+*.gif
+*.GIF
+*.bmp
+*.BMP
+*.tif
+*.TIF
+*.tiff
+*.TIFF
+*.svg
+*.SVG
+*.eps
+*.EPS
+backend/model/disease_classifier_model.h5
+backend/dataset/plantGuard_dataset/disease_classifier_model.h5
+backend/dataset/SVMTrain.zip

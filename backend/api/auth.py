@@ -37,8 +37,8 @@ def login_or_register():
             return jsonify({"error": "Invalid mobile number or password"}), 400
     else:
         # Register new user (password will be hashed in User model)
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        new_user = User(mobile_number=mobile_number, password=hashed_password)
+        # hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        new_user = User(mobile_number=mobile_number, password=password)
         db.session.add(new_user)
         db.session.commit()
         user = new_user

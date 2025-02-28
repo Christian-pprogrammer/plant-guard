@@ -1,0 +1,308 @@
+{
+  "diseases": [
+    {
+      "disease": "Apple_scab",
+      "plant": "Apple",
+      "treatment": ["Apply fungicides", "Prune infected branches"],
+      "prevention_measures": ["Remove fallen leaves", "Ensure proper spacing", "Use resistant varieties"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Black_rot",
+      "plant": "Apple",
+      "treatment": ["Remove infected fruit", "Apply fungicides"],
+      "prevention_measures": ["Prune for air circulation", "Avoid overhead watering", "Sanitize pruning tools"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Cedar_apple_rust",
+      "plant": "Apple",
+      "treatment": ["Apply fungicides", "Remove nearby cedar trees"],
+      "prevention_measures": ["Plant resistant varieties", "Avoid planting near cedars"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Apple_healthy",
+      "plant": "Apple",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Blueberry_healthy",
+      "plant": "Blueberry",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Powdery_mildew",
+      "plant": "Cherry (including sour)",
+      "treatment": ["Apply fungicides", "Prune infected branches"],
+      "prevention_measures": ["Ensure good air circulation", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Cherry_healthy",
+      "plant": "Cherry (including sour)",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Cercospora_leaf_spot_Gray_leaf_spot",
+      "plant": "Corn (maize)",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Rotate crops", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Common_rust",
+      "plant": "Corn (maize)",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Plant resistant varieties", "Ensure proper spacing"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Northern_Leaf_Blight",
+      "plant": "Corn (maize)",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Rotate crops", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Corn_maize_healthy",
+      "plant": "Corn (maize)",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Black_rot",
+      "plant": "Grape",
+      "treatment": ["Remove infected fruit", "Apply fungicides"],
+      "prevention_measures": ["Prune for air circulation", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Esca_Black_Measles",
+      "plant": "Grape",
+      "treatment": ["Prune infected branches", "Apply fungicides"],
+      "prevention_measures": ["Sanitize pruning tools", "Avoid over-fertilization"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Leaf_blight_Isariopsis_Leaf_Spot",
+      "plant": "Grape",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Ensure good air circulation", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Grape_healthy",
+      "plant": "Grape",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Haunglongbing_Citrus_greening",
+      "plant": "Orange",
+      "treatment": ["Remove infected trees", "Control psyllid insects"],
+      "prevention_measures": ["Plant disease-free trees", "Monitor for psyllids"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Bacterial_spot",
+      "plant": "Peach",
+      "treatment": ["Apply copper-based sprays", "Prune infected branches"],
+      "prevention_measures": ["Avoid overhead watering", "Sanitize pruning tools"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Peach_healthy",
+      "plant": "Peach",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Bacterial_spot",
+      "plant": "Pepper (bell)",
+      "treatment": ["Apply copper-based sprays", "Remove infected leaves"],
+      "prevention_measures": ["Avoid overhead watering", "Sanitize pruning tools"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Pepper_bell_healthy",
+      "plant": "Pepper (bell)",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Early_blight",
+      "plant": "Potato",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Rotate crops", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Late_blight",
+      "plant": "Potato",
+      "treatment": ["Apply fungicides", "Remove infected plants"],
+      "prevention_measures": ["Rotate crops", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Potato_healthy",
+      "plant": "Potato",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Raspberry_healthy",
+      "plant": "Raspberry",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Soybean_healthy",
+      "plant": "Soybean",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Powdery_mildew",
+      "plant": "Squash",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Ensure good air circulation", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Leaf_scorch",
+      "plant": "Strawberry",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Ensure good air circulation", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Strawberry_healthy",
+      "plant": "Strawberry",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "disease": "Bacterial_spot",
+      "plant": "Tomato",
+      "treatment": ["Apply copper-based sprays", "Remove infected leaves"],
+      "prevention_measures": ["Avoid overhead watering", "Sanitize pruning tools"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Early_blight",
+      "plant": "Tomato",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Rotate crops", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Late_blight",
+      "plant": "Tomato",
+      "treatment": ["Apply fungicides", "Remove infected plants"],
+      "prevention_measures": ["Rotate crops", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Leaf_Mold",
+      "plant": "Tomato",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Ensure good air circulation", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Septoria_leaf_spot",
+      "plant": "Tomato",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Rotate crops", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Spider_mites_Two-spotted_spider_mite",
+      "plant": "Tomato",
+      "treatment": ["Apply miticides", "Remove infected leaves"],
+      "prevention_measures": ["Ensure good air circulation", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Target_Spot",
+      "plant": "Tomato",
+      "treatment": ["Apply fungicides", "Remove infected leaves"],
+      "prevention_measures": ["Rotate crops", "Avoid overhead watering"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Tomato_Yellow_Leaf_Curl_Virus",
+      "plant": "Tomato",
+      "treatment": ["Remove infected plants", "Control whiteflies"],
+      "prevention_measures": ["Use resistant varieties", "Monitor for whiteflies"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Tomato_mosaic_virus",
+      "plant": "Tomato",
+      "treatment": ["Remove infected plants", "Control aphids"],
+      "prevention_measures": ["Use resistant varieties", "Monitor for aphids"],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "disease": "Tomato_healthy",
+      "plant": "Tomato",
+      "treatment": [],
+      "prevention_measures": ["Regular watering", "Proper fertilization", "Adequate sunlight"],
+      "isHealthy": true,
+      "isPlant": true
+    }
+  ]
+}

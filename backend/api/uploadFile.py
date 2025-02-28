@@ -31,7 +31,7 @@ def upload_image():
 
         prediction = predict_plant_and_disease(filepath)
 
-        print(f"Prediction: {prediction}", flush=True)
+        print(f"Prediction: {prediction['disease']['type']}", flush=True)
 
         return jsonify({"message": "Prediction successful", "result": prediction})
     

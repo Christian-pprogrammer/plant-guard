@@ -1,17 +1,17 @@
 openapi: 3.0.0
 info:
   title: Flask API with Swagger
-  description: API documentation for the authentication and file upload endpoints.
+  description: API documentation for authentication and file upload endpoints.
   version: 1.0.0
 servers:
   - url: http://127.0.0.1:5000
     description: Local server
 
 paths:
-  /auth/register:
+  /auth/login_or_register:
     post:
-      summary: Register a new user
-      description: Creates a new user in the system.
+      summary: Login or Register a user
+      description: Authenticates a user by mobile number and password. If the user does not exist, a new account is created.
       requestBody:
         required: true
         content:
@@ -19,38 +19,7 @@ paths:
             schema:
               type: object
               properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
                 mobileNumber:
-                  type: string
-                location:
-                  type: string
-                password:
-                  type: string
-                confirmPassword:
-                  type: string
-      responses:
-        "201":
-          description: User registered successfully
-        "400":
-          description: Bad request
-
-  /auth/login:
-    post:
-      summary: User login
-      description: Authenticates a user and returns a JWT token.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
                   type: string
                 password:
                   type: string

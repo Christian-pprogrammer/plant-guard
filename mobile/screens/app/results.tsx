@@ -44,14 +44,14 @@ const { height } = Dimensions.get('window');
   
     return (
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
-        <StatusBar barStyle={scrollValue>150? 'dark-content' : 'light-content'} backgroundColor={'white'} />
+        <StatusBar barStyle={scrollValue>150? 'dark-content' : 'light-content'} backgroundColor={scrollValue>150? 'white': 'black'} />
         <SafeAreaView style={{flex: 1}} className=''>
 
         <View
           className='w-full z-[9999]'
             style={{
               position: 'absolute',
-              top: StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 40,
+              top: Platform.OS == 'android'? 0 : StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 40,
               backgroundColor: scrollValue>150? 'white': 'transparent'
             }}
           >
@@ -136,7 +136,7 @@ const { height } = Dimensions.get('window');
        </View>
       </ScrollView>
 
-      <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'space-between',columnGap: 22}} className='w-full py-5 pb-10 px-[20px] absolute bottom-0 bg-white'>
+      <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'space-between',columnGap: 22}} className={`w-full py-5 ${Platform.OS == 'android'? 'pb-5' : 'pb-10'} px-[20px] absolute bottom-0 bg-white`}>
         <TouchableRipple borderless onPress={()=>{
             navigation.navigate("HomePage")
         }}>

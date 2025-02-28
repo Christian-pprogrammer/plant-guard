@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { View, StyleSheet, Text, Alert, ActivityIndicator, Platform, PermissionsAndroid } from "react-native";
-import { Camera, useCameraDevices } from "react-native-vision-camera";
+import { Camera, useCameraDevice, useCameraDevices } from "react-native-vision-camera";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CustomText from "../components/custom-text";
 import {TouchableRipple} from "react-native-paper"
@@ -14,14 +14,14 @@ import FixedBottomSheetModal from "../components/fixed-bottomsheet";
 import { BottomSheetModal, BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ImageUpload from "../components/image-upload";
+import { request, PERMISSIONS } from 'react-native-permissions';
 
 const HomePage = ({ navigation }:any) => {
   const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
   const [cameraType, setCameraType] = useState("back");
   const [flash, setFlash] = useState("off");
-  const devices:any = useCameraDevices()
   const [image, setImage] = useState<any>('')
-  const device = devices.filter((d:any) => d.position === cameraType)[0];
+  const device = useCameraDevice(cameraType =='back'? 'back': 'front')
   const cameraRef = useRef<any>(null);
 
   const snapPoints = useMemo(() => ['80%'], []);
@@ -66,6 +66,7 @@ const HomePage = ({ navigation }:any) => {
               name: fileName,
               type: '.png'
             })
+        handlePresentModalPress2()
           })
         }, 400);
 }
@@ -78,6 +79,11 @@ const HomePage = ({ navigation }:any) => {
   useEffect(() => {
     const checkPermission = async () => {
       try {
+
+        if(Platform.OS == 'android'){
+          await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+        }
+
         const cameraPermissionStatus = await Camera.requestCameraPermission();
         setCameraPermission(cameraPermissionStatus === "granted");
         
@@ -107,7 +113,7 @@ const HomePage = ({ navigation }:any) => {
         });
         console.log("Photo captured:", photo.path);
         setImage({
-          uri: photo.path,
+          uri: "file://"+photo.path,
           name: photo?.name,
           type: '.png'
         })
@@ -320,7 +326,7 @@ const styles = StyleSheet.create({
 
   topButtons: {
     position: "absolute",
-    top: Platform.OS == 'ios'? 45 : 40,
+    top: Platform.OS == 'ios'? 45 : 10,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",

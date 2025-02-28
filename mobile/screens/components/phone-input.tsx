@@ -68,7 +68,7 @@ const PhoneNumberInput = ({
           countryPickerProps={{withAlphaFilter: true}}
           defaultValue={value}
           defaultCode={defaultCountryCode || deviceCode}
-            placeholder={t('form.PhoneNumber')}
+            placeholder={"Enter phone number"}
             textInputStyle={{
               color: 'black',
               backgroundColor: focused? '#fff' : '#F3F4F6',
@@ -97,7 +97,7 @@ const PhoneNumberInput = ({
               borderRadius: 10,
               borderWidth: error ? focused? 2: 1 : focused? 2: 0,
               backgroundColor: focused ? '#fff' : '#F3F4F6',
-              borderColor: !focused && error? "transparent": focused? "#0B57D0" : 'transparent'
+              borderColor: !focused && error? "transparent": focused? "#00A362" : 'transparent'
             }}
             codeTextStyle={{
               backgroundColor: focused? '#fff' : '#F3F4F6',

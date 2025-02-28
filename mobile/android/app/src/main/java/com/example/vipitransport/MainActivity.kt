@@ -1,4 +1,4 @@
-package com.vipibusiness
+package com.platguard
 
 import android.content.Intent
 import android.graphics.Color
@@ -24,7 +24,6 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.install.model.AppUpdateType
 import com.zoontek.rnbootsplash.RNBootSplash
-import com.github.wumke.RNImmediatePhoneCall.RNImmediatePhoneCallPackage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -96,7 +95,6 @@ class MainActivity : ReactActivity() {
         DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        RNImmediatePhoneCallPackage.onRequestPermissionsResult(requestCode, permissions, grantResults) // very important event callback
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 

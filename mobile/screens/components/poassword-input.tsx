@@ -16,69 +16,54 @@ interface Props {
   value: string;
   onChange: Function;
   label: string;
-  type: any;
-  multiline?: boolean;
-  height?: number;
-  disabled?: boolean;
-  onFocus?: Function;
-  placeholder?: string;
   error?: boolean;
-  autoFocus?: boolean;
-  onBlur?: Function;
   maxLength?: number;
-  inputRef?: any;
+  autoFocus?: boolean;
+  inputRef?:any;
+  onBlur?: Function;
 }
 
-const CustomInput = ({
-  value,
-  onChange,
-  label,
-  type,
-  multiline,
-  height,
-  disabled,
-  onFocus,
-  placeholder,
-  error,
-  autoFocus,
-  onBlur,
-  maxLength,
-  inputRef
-}: Props) => {
+const PasswordInput = ({value, onChange, label, error, maxLength,autoFocus,inputRef,onBlur}: Props) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [focused, setFocused] = useState<boolean>(false);
 
   return (
     <TextInput
       label={<Text className="text-[#6C757D] font-[400]">{label}</Text>}
       value={value}
-      multiline={multiline ? multiline : false}
-      {...(maxLength && {maxLength})}
+      ref={inputRef? inputRef : null}
       mode="outlined"
-      ref={inputRef}
-      placeholder={placeholder ? placeholder : ''}
-      textColor="black"
+      {...(maxLength && {maxLength})}
       activeOutlineColor={'#041E31'}
-      keyboardType={type}
-      autoFocus={autoFocus ? autoFocus : false}
-      onBlur={() => {
-        setFocused(false);
-        if (onBlur) {
-          onBlur();
-        }
-      }}
-      disabled={disabled}
-      onFocus={() => {
+      maxLength={100}
+      keyboardAppearance='light'
+      onFocus = {() => {
         setFocused(true);
-        if (onFocus) {
-          onFocus();
+      }}
+      onBlur = { () => {
+        setFocused(false);
+        if(onBlur){
+          onBlur()
         }
       }}
-      outlineStyle={{borderWidth: error ? focused? 2 : 1 : focused? 2: 0,borderColor: !focused && error? "transparent": focused? "#0B57D0" : 'transparent'}}
+      secureTextEntry={!isPasswordVisible}
+      right={
+        <TextInput.Icon
+          style={{position: 'relative', top: 3.5}}
+          color={'#ADB5BD'}
+          onPress={() => {
+            setIsPasswordVisible(!isPasswordVisible);
+          }}
+          icon={isPasswordVisible ? 'eye' : 'eye-off'}
+        />
+      }
+      autoFocus={autoFocus? true : false}
+      outlineStyle={{borderWidth: error ? focused? 2 : 1 : focused? 2: 0,borderColor: !focused && error? "transparent": focused? "#00A362" : 'transparent'}}
       outlineColor={error ? '#e53e3e' : '#DEE2E6'}
       style={{
         borderRadius: 50,
         color: 'black',
-        height: height ? height : 55,
+        height: 55,
         fontWeight: 'normal',
         backgroundColor: focused? '#fff' : '#F3F4F6'
       }}
@@ -91,4 +76,4 @@ const CustomInput = ({
   );
 };
 
-export default CustomInput;
+export default PasswordInput;

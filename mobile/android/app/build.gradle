@@ -76,9 +76,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.vipibusiness"
+    namespace "com.platguard"
     defaultConfig {
-        applicationId "com.vipibusiness"
+        applicationId "com.platguard"
         missingDimensionStrategy 'store', 'play'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -127,7 +127,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation("com.google.android.play:app-update:2.1.0")
     implementation 'com.google.android.play:app-update-ktx:2.1.0'
-    implementation project(':react-native-immediate-phone-call')
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
@@ -137,11 +136,6 @@ dependencies {
 
     implementation project(':react-native-background-actions')
 
-     implementation(project(':react-native-iap')) {
-        capabilities {
-            requireCapability("sec_mobile:react-native-iap:playDebugApiElements")
-        }
-    }
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

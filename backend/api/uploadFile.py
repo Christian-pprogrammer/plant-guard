@@ -2,7 +2,7 @@ import os
 from flask import request, jsonify
 from werkzeug.utils import secure_filename
 
-from model.utils import predict_plant_and_disease
+from model.utils import predict_plant_and_disease, fetch_disease_by_name
 
 # Use an absolute path to ensure the correct location for the uploads folder
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static', 'uploads')
@@ -31,8 +31,8 @@ def upload_image():
 
         prediction = predict_plant_and_disease(filepath)
 
-        print(f"Prediction: {prediction['disease']['type']}", flush=True)
+        disease_info = fetch_disease_by_name(prediction['disease']['type'])
 
-        return jsonify({"message": "Prediction successful", "result": prediction})
+        return jsonify({"message": "Prediction successful", "result": disease_info})
     
     return jsonify({"error": "Disease predition failed"}), 500

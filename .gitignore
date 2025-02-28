@@ -15,8 +15,8 @@ backend/dataset/SVMTrain/
 *.JPG
 *.jpeg
 *.JPEG
-*.png
-*.PNG
+backend/*.png
+backend/*.PNG
 *.gif
 *.GIF
 *.bmp

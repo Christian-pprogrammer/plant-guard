@@ -13,3 +13,19 @@ backend/dataset/SVMTrain/
 
 *.jpg
 *.JPG
+*.jpeg
+*.JPEG
+*.png
+*.PNG
+*.gif
+*.GIF
+*.bmp
+*.BMP
+*.tif
+*.TIF
+*.tiff
+*.TIFF
+*.svg
+*.SVG
+*.eps
+*.EPS

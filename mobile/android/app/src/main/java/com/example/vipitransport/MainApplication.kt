@@ -1,4 +1,4 @@
-package com.vipibusiness
+package com.platguard
 
 import com.asterinet.react.bgactions.BackgroundActionsPackage; 
 import android.app.Application

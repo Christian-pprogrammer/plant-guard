@@ -2,17 +2,17 @@
   "images": [
     {
       "idiom": "universal",
-      "filename": "bootsplash_logo-pty3dc.png",
+      "filename": "bootsplash_logo-b4ncp.png",
       "scale": "1x"
     },
     {
       "idiom": "universal",
-      "filename": "bootsplash_logo-pty3dc@2x.png",
+      "filename": "bootsplash_logo-b4ncp@2x.png",
       "scale": "2x"
     },
     {
       "idiom": "universal",
-      "filename": "bootsplash_logo-pty3dc@3x.png",
+      "filename": "bootsplash_logo-b4ncp@3x.png",
       "scale": "3x"
     }
   ],

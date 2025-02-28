@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "generate": "npx react-native generate-bootsplash ./assets/images/applogosplash.png --background=0B57D0 --logo-width=160 --flavor=main",
+    "generate": "npx react-native generate-bootsplash ./assets/images/applogosplash.png --background=FFFFFF --logo-width=160 --flavor=main",
     "newVersion": "react-native-version --never-amend",
     "release": "npx react-native build-android --mode=release"
   },
@@ -69,7 +69,7 @@
     "react-native-screens": "^3.29.0",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.0.3",
-    "react-native-vision-camera": "^4.6.4",
+    "react-native-vision-camera": "^4.3.2",
     "react-native-webview": "^13.8.4",
     "web-streams-polyfill": "^4.0.0"
   },

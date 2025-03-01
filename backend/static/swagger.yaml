@@ -7,6 +7,13 @@ servers:
   - url: http://127.0.0.1:5000
     description: Local server
 
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
 paths:
   /auth/login_or_register:
     post:
@@ -33,6 +40,8 @@ paths:
     post:
       summary: Upload an image
       description: Uploads an image file to the server.
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -48,6 +57,16 @@ paths:
           description: File uploaded successfully
         "400":
           description: No file selected or invalid file format
+
+  /searchHistory:
+    get:
+      summary: Get upload history
+      description: Retrieves the list of uploaded images with their disease predictions.
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: List of upload history
 
   /display/{filename}:
     get:

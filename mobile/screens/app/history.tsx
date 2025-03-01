@@ -13,7 +13,7 @@ export default function History({ route,navigation }: any) {
   const isFocused = useIsFocused();
   
   // Sample scan history data
-  const scanHistory = [
+  const [scanHistory,setScanHistory] = useState<any>([
     {
       id: 1,
       plantName: "Tomato",
@@ -23,43 +23,7 @@ export default function History({ route,navigation }: any) {
       scanDate: new Date(2025, 1, 26),
       severity: "High"
     },
-    {
-      id: 2,
-      plantName: "Rose",
-      diseaseName: "Black Spot",
-      description: "Common fungal disease producing black spots on rose leaves, weakening the plant over time.",
-      imageUrl: "https://gachwala.in/wp-content/uploads/2022/07/Tomato-Seeds.jpg",
-      scanDate: new Date(2025, 1, 24),
-      severity: "Medium"
-    },
-    {
-      id: 3,
-      plantName: "Cucumber",
-      diseaseName: "Powdery Mildew",
-      description: "White powdery fungal growth on leaves affecting photosynthesis and overall plant health.",
-      imageUrl: "https://gachwala.in/wp-content/uploads/2022/07/Tomato-Seeds.jpg",
-      scanDate: new Date(2025, 1, 20),
-      severity: "Medium"
-    },
-    {
-      id: 4,
-      plantName: "Apple",
-      diseaseName: "Fire Blight",
-      description: "Bacterial disease causing blackened, wilted leaves and branches with a burnt appearance.",
-      imageUrl: "https://gachwala.in/wp-content/uploads/2022/07/Tomato-Seeds.jpg",
-      scanDate: new Date(2025, 1, 18),
-      severity: "High"
-    },
-    {
-      id: 5,
-      plantName: "Potato",
-      diseaseName: "Early Blight",
-      description: "Fungal disease characterized by brown spots with concentric rings on lower leaves.",
-      imageUrl: "https://gachwala.in/wp-content/uploads/2022/07/Tomato-Seeds.jpg",
-      scanDate: new Date(2025, 1, 15),
-      severity: "Medium"
-    }
-  ];
+  ]);
   
   // Severity color mapping
   const getSeverityColor = (severity:any) => {
@@ -87,7 +51,8 @@ export default function History({ route,navigation }: any) {
         setLoading(true);
         const res = await axiosInstance.get("/searchHistory");
         console.log('--->',res?.data);
-        alert(res?.data?.length)
+        // alert(res?.data?.length)
+        // setScanHistory()
         setLoading(false);
     }
     catch(error){
@@ -128,7 +93,7 @@ setLoading(false);
             )
           }
           
-          {!loading && scanHistory.map((scan, index) => (
+          {!loading && scanHistory.map((scan:any, index:any) => (
            <TouchableRipple
             borderless onPress={()=>{
             navigation.navigate("Results", {

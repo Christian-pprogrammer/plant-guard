@@ -15,6 +15,7 @@ cloudinary.config(
     api_secret=os.getenv('API_SECRET')
 )
 
+@jwt_required()
 def upload_image():
     """
     Handles the image file upload to Cloudinary and stores upload history if the user is logged in.
@@ -39,21 +40,13 @@ def upload_image():
 
         result = fetch_disease_by_name(disease_name)
 
-        # Try to get JWT identity (handle unauthenticated case)
-        user_id = None
-        try:
-            # This will check if the token exists and is valid
-            verify_jwt_in_request()  # This will raise an exception if no JWT token is found
-            user_id = get_jwt_identity()  # Now you can safely get the user ID
-        except:
-            # If no token is found or token is invalid, user_id remains None
-            pass
-
-        # Save upload history only for logged-in users
-        if user_id:
-            new_upload = UploadHistory(disease_name=disease_name, image_url=image_url, user_id=user_id)
-            db.session.add(new_upload)
-            db.session.commit()
+         # Get user_id from JWT token
+        user_id = get_jwt_identity()
+        
+        # Save upload history
+        new_upload = UploadHistory(disease_name=disease_name, image_url=image_url, user_id=user_id)
+        db.session.add(new_upload)
+        db.session.commit()
 
         result['image_url'] = image_url
 

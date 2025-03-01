@@ -13,7 +13,7 @@ auth = Blueprint('auth', __name__)
 bcrypt = Bcrypt()
 
 # Secret key for JWT
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 
 @auth.route('/login_or_register', methods=['POST'])
 def login_or_register():
@@ -45,10 +45,14 @@ def login_or_register():
 
     # Generate JWT token
     token_payload = {
+        "sub": str(user.id),
         "user_id": user.id,
         "mobile_number": user.mobile_number,
         "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1) 
     }
     token = pyjwt.encode(token_payload, SECRET_KEY, algorithm="HS256")
+
+    decoded_token = pyjwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+    print("Decoded Token:", decoded_token)
 
     return jsonify({"message": "Login successful", "token": token}), 200

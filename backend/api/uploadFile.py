@@ -15,7 +15,6 @@ cloudinary.config(
     api_secret=os.getenv('API_SECRET')
 )
 
-
 def upload_image():
     """
     Handles the image file upload to Cloudinary and stores upload history if the user is logged in.
@@ -40,8 +39,15 @@ def upload_image():
 
         result = fetch_disease_by_name(disease_name)
 
-        # Check if the user is logged in (JWT token exists)
-        user_id = get_jwt_identity() if get_jwt_identity() else None
+        # Try to get JWT identity (handle unauthenticated case)
+        user_id = None
+        try:
+            # This will check if the token exists and is valid
+            verify_jwt_in_request()  # This will raise an exception if no JWT token is found
+            user_id = get_jwt_identity()  # Now you can safely get the user ID
+        except:
+            # If no token is found or token is invalid, user_id remains None
+            pass
 
         # Save upload history only for logged-in users
         if user_id:
@@ -56,15 +62,19 @@ def upload_image():
     return jsonify({"error": "Disease prediction failed"}), 500
 
 
+@jwt_required()  # Ensures the user is authenticated for this endpoint
 def get_upload_history():
     """
     Fetch upload history with disease_name and image_url for the authenticated user.
     """
+    # Fetch the user ID from the JWT token (ensured to be valid by @jwt_required())
     user_id = get_jwt_identity()
+
+    # Query the database for uploads by the authenticated user
     uploads = UploadHistory.query.filter_by(user_id=user_id).with_entities(UploadHistory.disease_name,
                                                                            UploadHistory.image_url).all()
 
-    # loop in uploads
+    # Process the uploads
     results = []
     for u in uploads:
         result = fetch_disease_by_name(u.disease_name)

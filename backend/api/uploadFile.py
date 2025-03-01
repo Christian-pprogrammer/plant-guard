@@ -3,7 +3,7 @@ import cloudinary
 import cloudinary.uploader
 from flask import request, jsonify
 from werkzeug.utils import secure_filename
-from model.utils import predict_plant_and_disease
+from model.utils import predict_plant_and_disease, fetch_disease_by_name
 from model.db import db
 from model.uploadHistory import UploadHistory
 from flask_jwt_extended import get_jwt_identity, jwt_required
@@ -38,6 +38,8 @@ def upload_image():
         prediction = predict_plant_and_disease(image_url)
         disease_name = prediction['disease']['type']
 
+        result = fetch_disease_by_name(disease_name)
+
         # Check if the user is logged in (JWT token exists)
         user_id = get_jwt_identity() if get_jwt_identity() else None
 
@@ -47,10 +49,9 @@ def upload_image():
             db.session.add(new_upload)
             db.session.commit()
 
-        # append image url to prediction result
-        prediction['image_url'] = image_url
+        result['image_url'] = image_url
 
-        return jsonify({"message": "Prediction successful", "result": prediction})
+        return jsonify({"message": "Prediction successful", "result": result})
 
     return jsonify({"error": "Disease prediction failed"}), 500
 
@@ -64,8 +65,10 @@ def get_upload_history():
                                                                            UploadHistory.image_url).all()
 
     # loop in uploads
+    results = []
     for u in uploads:
-        print(u.disease_name, u.image_url)
+        result = fetch_disease_by_name(u.disease_name)
+        result['image_url'] = u.image_url
+        results.append(result)
 
-    history = [{"disease_name": u.disease_name, "image_url": u.image_url} for u in uploads]
-    return jsonify(history)
+    return jsonify(results)

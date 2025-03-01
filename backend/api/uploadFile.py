@@ -15,6 +15,7 @@ cloudinary.config(
     api_secret=os.getenv('API_SECRET')
 )
 
+
 @jwt_required()
 def upload_image():
     """
@@ -35,14 +36,43 @@ def upload_image():
         image_url = upload_result.get("secure_url")
 
         # Predict disease
-        prediction = predict_plant_and_disease(image_url)
+        prediction = None
+        try:
+            prediction = predict_plant_and_disease(image_url)
+            print(prediction)
+        except Exception as e:
+            return jsonify({"message": "Disease prediction failed", "result": {
+                "disease": None,
+                "plant": None,
+                "image_url": image_url,
+                "isHealthy": False,
+                "isPlant": False,
+                "name": None,
+                "plant": None,
+                "prevention_measures": [],
+                "treatment": []
+            }}), 200
+
+        if (prediction['disease']['confidence'] < 0.7):
+            return jsonify({"message": "Disease prediction failed", "result": {
+                "disease": None,
+                "plant": None,
+                "image_url": image_url,
+                "isHealthy": False,
+                "isPlant": False,
+                "name": None,
+                "plant": None,
+                "prevention_measures": [],
+                "treatment": []
+            }}), 200
+
         disease_name = prediction['disease']['type']
 
         result = fetch_disease_by_name(disease_name)
 
-         # Get user_id from JWT token
+        # Get user_id from JWT token
         user_id = get_jwt_identity()
-        
+
         # Save upload history
         new_upload = UploadHistory(disease_name=disease_name, image_url=image_url, user_id=user_id)
         db.session.add(new_upload)

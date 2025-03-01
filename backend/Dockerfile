@@ -23,8 +23,8 @@ RUN pip install --no-cache-dir --user -r requirements-apis.txt && \
     rm -rf /root/.cache/pip
 
 # Install torch in separate layers
-COPY requirements-torch-base.txt .
-RUN pip install --no-cache-dir --user -r requirements-torch-base.txt && \
+COPY requirements-torch.txt .
+RUN pip install --no-cache-dir --user -r requirements-torch.txt && \
     rm -rf /root/.cache/pip
 
 COPY requirements-torch-audio-vision.txt .

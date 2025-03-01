@@ -1,38 +1,84 @@
 import os
+import cloudinary
+import cloudinary.uploader
 from flask import request, jsonify
 from werkzeug.utils import secure_filename
+from model.utils import predict_plant_and_disease, fetch_disease_by_name
+from model.db import db
+from model.uploadHistory import UploadHistory
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
-from model.utils import predict_plant_and_disease
-
-# Use an absolute path to ensure the correct location for the uploads folder
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static', 'uploads')
-
-# Create the uploads folder if it doesn't exist
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name=os.getenv('CLOUD_NAME'),
+    api_key=os.getenv('API_KEY'),
+    api_secret=os.getenv('API_SECRET')
+)
 
 def upload_image():
     """
-    Handles the image file upload.
-    - Checks if the file is part of the request.
-    - Saves the file to the upload folder.
-    - Returns a success message along with the filename.
+    Handles the image file upload to Cloudinary and stores upload history if the user is logged in.
     """
     if 'file' not in request.files:
         return jsonify({"error": "No file part in the request"}), 400
-    
+
     file = request.files['file']
     if file.filename == '':
         return jsonify({"error": "No file selected"}), 400
-    
+
     if file:
         filename = secure_filename(file.filename)
-        filepath = os.path.join(UPLOAD_FOLDER, filename)
-        file.save(filepath)
 
-        prediction = predict_plant_and_disease(filepath)
+        # Upload file to Cloudinary
+        upload_result = cloudinary.uploader.upload(file)
+        image_url = upload_result.get("secure_url")
 
-        print(f"Prediction: {prediction}", flush=True)
+        # Predict disease
+        prediction = predict_plant_and_disease(image_url)
+        disease_name = prediction['disease']['type']
 
-        return jsonify({"message": "Prediction successful", "result": prediction})
-    
-    return jsonify({"error": "Disease predition failed"}), 500
+        result = fetch_disease_by_name(disease_name)
+
+        # Try to get JWT identity (handle unauthenticated case)
+        user_id = None
+        try:
+            # This will check if the token exists and is valid
+            verify_jwt_in_request()  # This will raise an exception if no JWT token is found
+            user_id = get_jwt_identity()  # Now you can safely get the user ID
+        except:
+            # If no token is found or token is invalid, user_id remains None
+            pass
+
+        # Save upload history only for logged-in users
+        if user_id:
+            new_upload = UploadHistory(disease_name=disease_name, image_url=image_url, user_id=user_id)
+            db.session.add(new_upload)
+            db.session.commit()
+
+        result['image_url'] = image_url
+
+        return jsonify({"message": "Prediction successful", "result": result})
+
+    return jsonify({"error": "Disease prediction failed"}), 500
+
+
+@jwt_required()  # Ensures the user is authenticated for this endpoint
+def get_upload_history():
+    """
+    Fetch upload history with disease_name and image_url for the authenticated user.
+    """
+    # Fetch the user ID from the JWT token (ensured to be valid by @jwt_required())
+    user_id = get_jwt_identity()
+
+    # Query the database for uploads by the authenticated user
+    uploads = UploadHistory.query.filter_by(user_id=user_id).with_entities(UploadHistory.disease_name,
+                                                                           UploadHistory.image_url).all()
+
+    # Process the uploads
+    results = []
+    for u in uploads:
+        result = fetch_disease_by_name(u.disease_name)
+        result['image_url'] = u.image_url
+        results.append(result)
+
+    return jsonify(results)

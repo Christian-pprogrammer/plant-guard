@@ -1,0 +1,253 @@
+{
+  "diseases": [
+    {
+      "name": "Corn_maize_Common_rust",
+      "plant": "Corn (maize)",
+      "disease": "Common Rust",
+      "treatment": [
+        "Apply fungicides containing azoxystrobin or pyraclostrobin",
+        "Remove and destroy infected plant debris",
+        "Use resistant maize varieties",
+        "Apply sulfur-based fungicides early in the season",
+        "Rotate crops with non-host plants like legumes"
+      ],
+      "prevention_measures": [
+        "Plant rust-resistant maize varieties",
+        "Avoid planting in areas with high humidity",
+        "Ensure proper spacing between plants for air circulation",
+        "Remove and destroy infected plant material after harvest",
+        "Avoid overhead irrigation to reduce leaf wetness"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Corn_maize_healthy",
+      "plant": "Corn (maize)",
+      "disease": "Healthy",
+      "treatment": [],
+      "prevention_measures": [
+        "Ensure proper soil nutrition with balanced fertilization",
+        "Practice crop rotation to prevent soil-borne diseases",
+        "Monitor for pests and diseases regularly",
+        "Use certified disease-free seeds",
+        "Maintain adequate spacing between plants"
+      ],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "name": "Grape_Black_rot",
+      "plant": "Grape",
+      "disease": "Black Rot",
+      "treatment": [
+        "Apply fungicides like mancozeb or captan",
+        "Prune and destroy infected canes and leaves",
+        "Remove and burn mummified fruit",
+        "Use copper-based sprays during the growing season",
+        "Apply fungicides at bud break and early fruit development"
+      ],
+      "prevention_measures": [
+        "Prune vines to improve air circulation",
+        "Remove and destroy infected plant debris",
+        "Avoid overhead irrigation to reduce leaf wetness",
+        "Plant resistant grape varieties",
+        "Apply fungicides preventatively during wet seasons"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Grape_Esca_Black_Measles",
+      "plant": "Grape",
+      "disease": "Esca (Black Measles)",
+      "treatment": [
+        "Prune and remove infected wood during dry periods",
+        "Apply fungicides like thiophanate-methyl",
+        "Use wound sealants after pruning to prevent infection",
+        "Remove and destroy severely infected vines",
+        "Apply biocontrol agents like Trichoderma species"
+      ],
+      "prevention_measures": [
+        "Avoid mechanical damage to vines during pruning",
+        "Disinfect pruning tools between cuts",
+        "Plant certified disease-free vines",
+        "Ensure proper vineyard sanitation",
+        "Avoid over-fertilization with nitrogen"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Grape_healthy",
+      "plant": "Grape",
+      "disease": "Healthy",
+      "treatment": [],
+      "prevention_measures": [
+        "Monitor vines regularly for signs of disease",
+        "Practice proper pruning techniques",
+        "Use drip irrigation to avoid wetting leaves",
+        "Apply balanced fertilization",
+        "Remove weeds that can harbor pests"
+      ],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "name": "Peach_Bacterial_spot",
+      "plant": "Peach",
+      "disease": "Bacterial Spot",
+      "treatment": [
+        "Apply copper-based bactericides during dormancy",
+        "Use streptomycin sprays during bloom",
+        "Prune and destroy infected branches",
+        "Apply kaolin clay to reduce bacterial spread",
+        "Use resistant peach varieties"
+      ],
+      "prevention_measures": [
+        "Avoid overhead irrigation to reduce leaf wetness",
+        "Plant in well-drained soil with good air circulation",
+        "Remove and destroy fallen leaves and fruit",
+        "Disinfect pruning tools regularly",
+        "Avoid excessive nitrogen fertilization"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Peach_healthy",
+      "plant": "Peach",
+      "disease": "Healthy",
+      "treatment": [],
+      "prevention_measures": [
+        "Monitor trees regularly for pests and diseases",
+        "Prune trees to improve air circulation",
+        "Apply balanced fertilization",
+        "Use drip irrigation to avoid wetting leaves",
+        "Remove weeds and debris from around trees"
+      ],
+      "isHealthy": true,
+      "isPlant": true
+    },
+    {
+      "name": "Tomato_Bacterial_spot",
+      "plant": "Tomato",
+      "disease": "Bacterial Spot",
+      "treatment": [
+        "Apply copper-based bactericides",
+        "Use streptomycin sprays during early infection",
+        "Remove and destroy infected plants",
+        "Apply hydrogen peroxide-based sprays",
+        "Use resistant tomato varieties"
+      ],
+      "prevention_measures": [
+        "Avoid overhead watering to reduce leaf wetness",
+        "Rotate crops with non-host plants",
+        "Use disease-free seeds and transplants",
+        "Disinfect tools and equipment regularly",
+        "Remove and destroy plant debris after harvest"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Tomato_Early_blight",
+      "plant": "Tomato",
+      "disease": "Early Blight",
+      "treatment": [
+        "Apply fungicides containing chlorothalonil or mancozeb",
+        "Remove and destroy infected leaves",
+        "Use resistant tomato varieties",
+        "Apply neem oil as a natural fungicide",
+        "Prune lower leaves to improve air circulation"
+      ],
+      "prevention_measures": [
+        "Rotate crops with non-host plants for 2-3 years",
+        "Avoid overhead irrigation to reduce leaf wetness",
+        "Mulch around plants to prevent soil splash",
+        "Remove and destroy infected plant debris",
+        "Ensure proper spacing between plants"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Tomato_Late_blight",
+      "plant": "Tomato",
+      "disease": "Late Blight",
+      "treatment": [
+        "Apply fungicides containing chlorothalonil or metalaxyl",
+        "Remove and destroy infected plants immediately",
+        "Use resistant tomato varieties",
+        "Apply copper-based sprays preventatively",
+        "Avoid working in wet fields to prevent spread"
+      ],
+      "prevention_measures": [
+        "Rotate crops with non-host plants",
+        "Avoid overhead irrigation to reduce leaf wetness",
+        "Remove and destroy volunteer tomato plants",
+        "Use certified disease-free seeds and transplants",
+        "Monitor weather conditions for high-risk periods"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Tomato_Leaf_Mold",
+      "plant": "Tomato",
+      "disease": "Leaf Mold",
+      "treatment": [
+        "Apply fungicides containing chlorothalonil or mancozeb",
+        "Remove and destroy infected leaves",
+        "Improve air circulation by pruning",
+        "Use resistant tomato varieties",
+        "Apply sulfur-based fungicides"
+      ],
+      "prevention_measures": [
+        "Avoid overhead irrigation to reduce humidity",
+        "Ensure proper spacing between plants",
+        "Use drip irrigation to keep leaves dry",
+        "Remove and destroy infected plant debris",
+        "Rotate crops with non-host plants"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Tomato_Target_Spot",
+      "plant": "Tomato",
+      "disease": "Target Spot",
+      "treatment": [
+        "Apply fungicides containing azoxystrobin or difenoconazole",
+        "Remove and destroy infected leaves",
+        "Use resistant tomato varieties",
+        "Apply neem oil as a natural fungicide",
+        "Prune lower leaves to improve air circulation"
+      ],
+      "prevention_measures": [
+        "Rotate crops with non-host plants",
+        "Avoid overhead irrigation to reduce leaf wetness",
+        "Mulch around plants to prevent soil splash",
+        "Remove and destroy infected plant debris",
+        "Ensure proper spacing between plants"
+      ],
+      "isHealthy": false,
+      "isPlant": true
+    },
+    {
+      "name": "Tomato_healthy",
+      "plant": "Tomato",
+      "disease": "Healthy",
+      "treatment": [],
+      "prevention_measures": [
+        "Monitor plants regularly for signs of disease",
+        "Practice crop rotation with non-host plants",
+        "Use certified disease-free seeds and transplants",
+        "Avoid overhead irrigation to reduce leaf wetness",
+        "Remove weeds and debris from around plants"
+      ],
+      "isHealthy": true,
+      "isPlant": true
+    }
+  ]
+}

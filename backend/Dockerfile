@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y awscli && \
 COPY . .
 
 # Download model
+RUN curl -o ./models/disease_classifier_model.h5 https://plant-guard-bucket.s3.amazonaws.com/disease_classifier_model.h5
 RUN aws s3 cp s3://plant-guard-bucket/disease_classifier_model.h5 ./models/disease_classifier_model.h5
 
 EXPOSE 5000

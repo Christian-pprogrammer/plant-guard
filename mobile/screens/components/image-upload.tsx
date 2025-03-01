@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, Dimensions, View, Text } from "react-native";
+import { Alert, Image, Dimensions, View, Text, Platform } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import LoaderKit from 'react-native-loader-kit';
@@ -22,26 +22,43 @@ export default function ImageUpload({onClose, image,navigation}:any){
     const scale = useSharedValue(1);
     const rotation = useSharedValue(0);
     const progress = useSharedValue(0);
+        
+    const processImage = async (_image: any) => {
+      try {
+        setProcessing(true);
     
-    const processImage = async(_image:any) => {
-        try{
-            setProcessing(true);
-            // await axiosInstance.post("/processimage", {image: image})
-            setTimeout(() => {
-            setProcessing(false);
-            onClose();
-            setTimeout(() => {
-                navigation.navigate("Results", {
-                    image: _image.uri
-                  })
-                }, 500);
-            }, 6000);
-        }
-        catch(error:any){
-            setProcessing(false);
-            Alert.alert("Error occured", error?.response?.data?.message || error?.message)
-        }
-    }
+        // Prepare form data
+        const formData = new FormData();
+        formData.append("file", {
+          uri: _image.uri,
+          name: _image.name || `photo_${Date.now()}.jpg`,
+          type: _image.type || "image/jpeg",
+        });
+    
+        // Make API call
+        const res = await axiosInstance.post("/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        
+        console.log("res", res?.data)
+    
+        setTimeout(() => {
+          setProcessing(false);
+          onClose();
+          navigation.navigate("Results", {
+            image: _image.uri,
+            ...res?.data?.result
+          });
+        }, Platform.OS === "ios" ? 1000 : 500);
+      } catch (error: any) {
+        console.log(error);
+        setProcessing(false);
+        Alert.alert("Error occurred", error?.response?.data?.message || error?.message);
+      }
+    };
+    
 
     // Animation setup
     useEffect(() => {

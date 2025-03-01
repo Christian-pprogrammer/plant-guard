@@ -28,9 +28,11 @@ const { height } = Dimensions.get('window');
     const headerHeight = height * 0.5;
     const [plantImage, setPlantImage] = useState('')
     const [scrollValue, setScrollValue] = useState(0);
+    const [info, setInfo] = useState<any>({});
 
     useEffect(()=>{
    if(route?.params?.image){
+    setInfo(route?.params)
     setPlantImage(route?.params?.image)
    }
     },[route])
@@ -41,6 +43,31 @@ const { height } = Dimensions.get('window');
       if (scrollY > 150) {
       }
     };
+
+    const sharePlantHealthStatus = async () => {
+      const result = info;
+    
+      const message = `
+    📢 Plant Health Status 📢
+    
+    🌿 Plant: ${result?.plant}
+    ✅ Status: ${result?.disease}
+    
+    🛡️ Prevention Measures:
+    - ${result?.prevention_measures.join("\n- ")}
+    
+    📸 Image: ${result?.image_url}
+    `;
+    
+      try {
+        await Share.share({
+          message,
+        });
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    };
+    
   
     return (
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
@@ -101,28 +128,47 @@ const { height } = Dimensions.get('window');
       )}
 
        <View className='px-[20px] pt-4'>
+       <CustomText style={{
+  fontFamily: 'EuclidCircularB-Bold'
+}} className='text-standard text-xl mb-3'>{info?.plant || "This is not the plant"}</CustomText>
        <View style={{flexDirection: 'row',alignItems: 'center'}} className='mb-3'>
+        {
+          info?.plant && (
 <CustomText style={{
   fontFamily: 'EuclidCircularB-Bold'
-}} className='text-standard text-xl'>This plant looks </CustomText>
-<CustomText
+}} className='text-standard text-xl'>This plant looks </CustomText>)
+}
+{
+  info?.plant && (
+    <CustomText
  style={{
   fontFamily: 'EuclidCircularB-Bold'
 }}
- className='text-primary text-xl'>Healthy!</CustomText>
+ className={`${info?.isHealthy? 'text-primary' : 'text-red-700'} text-xl`}>{info?.isHealthy? 'Healthy!' : 'Sick!'}!</CustomText>
+  )
+}
         </View>
 
-        <CustomText className='text-body text-base mb-4'>This plant has disease called <CustomText className='font-bold text-base text-primary'>Canmnepiadiasis</CustomText>, this disease is caused by various factors including the water loss, lorem ipsum and the following m,ioght help in it's treatment.</CustomText>
-
+{
+  !info?.isHeathy && (
+    <CustomText className='text-body text-base mb-4'>This plant has disease called <CustomText className='font-bold text-base text-primary'>{info?.disease}</CustomText>, this disease has various treatment options including:</CustomText>
+  )
+}
+    {
+      !info?.isHeathy && (
         <CustomText
         style={{
           fontFamily: 'EuclidCircularB-Bold'
         }}
          className='text-xl text-standard mb-3'>Treatment options</CustomText>
+      )
+    }
 
-<View className='mb-3'>
 {
-    Instructions?.map((instruction:any)=>{
+ !info?.isHeathy && (
+    <View className='mb-3'>
+{
+    info?.treatment?.map((instruction:any)=>{
         return(
             <View style={{flexDirection: 'row',columnGap: 10,alignItems: 'center'}} className="mb-3">
                 <AntDesign color={'#00A362'} size={20} name={'checkcircle'}></AntDesign>
@@ -132,6 +178,35 @@ const { height } = Dimensions.get('window');
     })
 }
 </View>
+  )
+}
+
+{
+      info?.prevention_measures?.length>0 && (
+        <CustomText
+        style={{
+          fontFamily: 'EuclidCircularB-Bold'
+        }}
+         className='text-xl text-standard mb-3 mt-1'>Prevention measures</CustomText>
+      )
+    }
+
+{
+info?.prevention_measures?.length>0 && (
+    <View className='mb-3'>
+{
+   info?.prevention_measures?.map((instruction:any)=>{
+        return(
+            <View style={{flexDirection: 'row',columnGap: 10,alignItems: 'center'}} className="mb-3">
+                <AntDesign color={'#00A362'} size={20} name={'checkcircle'}></AntDesign>
+<CustomText className="text-base text-standard">{instruction}</CustomText>
+                </View>
+        )
+    })
+}
+</View>
+  )
+}
 
        </View>
       </ScrollView>
@@ -147,10 +222,7 @@ const { height } = Dimensions.get('window');
         </TouchableRipple>
        <View className='flex-1'>
        <CustomButton classNames={'py-3'} leftIcon={<AntDesign name='sharealt' color={'white'} size={24}/>} title={'Share'} onPress={()=>{
-        Share.share({
-          message: '',
-          title: 'Plant health'
-        })
+        sharePlantHealthStatus();
         }}></CustomButton>
        </View>
       </View>

@@ -31,10 +31,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>com.apple.developer.associated-domains</key>
-	<array>
-		<string>applinks:vipitransport.com</string>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>103</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -57,10 +53,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>We need access to your camera to take a photo. We do not use your camera for any other purpose.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow PlantGuard to access your microphone.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location allows you to connect with the nearest transporter's vehicles and the nearest loads(cargoes).</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow PlantGuard to access your microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow PlantGuard to access your photo library.</string>
 	<key>UIAppFonts</key>
@@ -91,7 +87,7 @@
 	<key>UIBackgroundModes</key>
 	<array/>
 	<key>UILaunchStoryboardName</key>
-	<string>BootSplash</string>
+	<string>BootSplash.storyboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -108,5 +104,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:vipitransport.com</string>
+	</array>
 </dict>
 </plist>

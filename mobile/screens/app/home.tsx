@@ -15,6 +15,8 @@ import { BottomSheetModal, BottomSheetModalProvider } from "@gorhom/bottom-sheet
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ImageUpload from "../components/image-upload";
 import { request, PERMISSIONS } from 'react-native-permissions';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from "@react-navigation/native";
 
 const HomePage = ({ navigation }:any) => {
   const [cameraPermission, setCameraPermission] = useState<boolean | null>(null);
@@ -103,6 +105,32 @@ const HomePage = ({ navigation }:any) => {
     
     checkPermission();
   }, [navigation]);
+
+  const [loggedIn, setLoggedIn] = useState<boolean>(false)
+  const isFocused = useIsFocused();
+
+  const checkAuth = async()=>{
+    try{
+         const token = await AsyncStorage.getItem("access_token");
+         if(token){
+            setLoggedIn(true)
+         }else{
+          setLoggedIn(false)
+         }
+    }
+    catch(error){
+        console.log(error)
+    }
+  }
+
+  useEffect(()=>{
+   checkAuth()
+  },[isFocused])
+
+  const logout = async()=>{
+    await AsyncStorage.removeItem("access_token");
+    navigation.navigate("Login")
+  }
 
   const takePicture = async () => {
     if (cameraRef.current) {
@@ -204,12 +232,25 @@ const HomePage = ({ navigation }:any) => {
           <Icon name={flash === "off" ? "flash-off" : "flash"} size={28} color={flash =='on'? 'yellow' : "white"} />
         </TouchableRipple>
         <TouchableRipple borderless className="rounded-full" onPress={()=>{
+         if(loggedIn){
+logout()
+         }else{
           navigation.navigate("Login")
+         }
         }} style={styles.iconButton}>
-          <Feather name="user" size={28} color="white" />
+          {
+            loggedIn?
+<MaterialIcons name="logout" size={28} color={'white'} />
+            :
+            <Feather name={"user"} size={28} color="white" />
+          }
         </TouchableRipple>
         <TouchableRipple borderless className="rounded-full" onPress={()=>{
-          navigation.navigate("History")
+          if(loggedIn){
+            navigation.navigate("History")
+          }else{
+            navigation.navigate("Login")
+          }
         }} style={styles.iconButton}>
           <Feather name="box" size={28} color="white" />
         </TouchableRipple>

@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { KeyboardAvoidingView, ScrollView, StatusBar, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Card, Chip, Avatar, Divider, useTheme, TouchableRipple } from "react-native-paper";
+import { Card, Chip, Avatar, Divider, useTheme, TouchableRipple, ActivityIndicator } from "react-native-paper";
 import TabNavBar from "../components/tab-navbar";
 import moment from "moment";
 import CustomText from "../components/custom-text";
+import { useIsFocused } from "@react-navigation/native";
+import axiosInstance from "../../config/axios";
 
 export default function History({ route,navigation }: any) {
   const theme = useTheme();
+  const isFocused = useIsFocused();
   
   // Sample scan history data
   const scanHistory = [
@@ -77,6 +80,26 @@ export default function History({ route,navigation }: any) {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   };
 
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const getHistory = async()=>{
+    try{
+        setLoading(true);
+        const res = await axiosInstance.get("/searchHistory");
+        console.log('--->',res?.data);
+        alert(res?.data?.length)
+        setLoading(false);
+    }
+    catch(error){
+console.log("------->Error", error)
+setLoading(false);
+    }
+  }
+
+  useEffect(()=>{
+   getHistory()
+  },[isFocused])
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
@@ -92,8 +115,20 @@ export default function History({ route,navigation }: any) {
           >
             Recent scans ({scanHistory.length})
           </CustomText>
+
+          {
+            loading && (
+                <View className="py-5">
+                    <ActivityIndicator
+                    size="large"
+                        color="#00A362"
+                    >
+                    </ActivityIndicator>
+                </View>
+            )
+          }
           
-          {scanHistory.map((scan, index) => (
+          {!loading && scanHistory.map((scan, index) => (
            <TouchableRipple
             borderless onPress={()=>{
             navigation.navigate("Results", {
@@ -154,7 +189,7 @@ export default function History({ route,navigation }: any) {
            </TouchableRipple>
           ))}
           
-          {scanHistory.length === 0 && (
+          {(!loading && scanHistory.length === 0) && (
             <View style={{ alignItems: "center", marginTop: 40, padding: 20 }}>
               <Avatar.Icon 
                 size={80} 

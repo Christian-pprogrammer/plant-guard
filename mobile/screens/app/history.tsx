@@ -14,34 +14,23 @@ export default function History({ route,navigation }: any) {
   
   // Sample scan history data
   const [scanHistory,setScanHistory] = useState<any>([
-    {
-      id: 1,
-      plantName: "Tomato",
-      diseaseName: "Late Blight",
-      description: "Fungal disease causing brown spots on leaves and fruits, leading to rapid plant decay.",
-      imageUrl: "https://gachwala.in/wp-content/uploads/2022/07/Tomato-Seeds.jpg",
-      scanDate: new Date(2025, 1, 26),
-      severity: "High"
-    },
   ]);
   
   // Severity color mapping
   const getSeverityColor = (severity:any) => {
     switch (severity) {
-      case "High":
-        return "#FF5252";
-      case "Medium":
-        return "#FFB74D";
-      case "Low":
-        return "#4CAF50";
+      case true:
+        return "green";
+      case false:
+        return "red";
       default:
-        return "#757575";
+        return "red";
     }
   };
 
   // Function to truncate description
   const truncateDescription = (text:any, maxLength = 60) => {
-    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    return text?.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   };
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -52,7 +41,7 @@ export default function History({ route,navigation }: any) {
         const res = await axiosInstance.get("/searchHistory");
         console.log('--->',res?.data);
         // alert(res?.data?.length)
-        // setScanHistory()
+        setScanHistory(res?.data);
         setLoading(false);
     }
     catch(error){
@@ -97,7 +86,8 @@ setLoading(false);
            <TouchableRipple
             borderless onPress={()=>{
             navigation.navigate("Results", {
-                image: scan.imageUrl 
+                image: scan.image_url,
+            ...scan
               })
            }} style={{borderRadius: 12,
             marginBottom: 12,
@@ -117,8 +107,8 @@ setLoading(false);
                   {/* Left: Image with fixed dimensions */}
                   <View style={{ width: 90, height: 90 }}>
                     <Image
-                      source={{ uri: scan.imageUrl }}
-                      style={{ width: 90, height: 90 }}
+                      source={{ uri: scan?.image_url }}
+                      style={{ width: 90, height: 90,borderRadius: 5 }}
                     />
                   </View>
                   
@@ -126,26 +116,26 @@ setLoading(false);
                   <View style={{ flex: 1, padding: 12 }}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 4,columnGap: 10 }}>
                     <CustomText numberOfLines={1} className="text-primary" style={{ fontSize: 16, fontWeight: "500", marginBottom: 4 }}>
-                      {scan.diseaseName}
+                      {scan.disease}
                     </CustomText>
                       <View 
                       className="px-3 py-1 rounded-lg"
                         style={{ 
-                          backgroundColor: getSeverityColor(scan.severity),
+                          backgroundColor: getSeverityColor(scan?.isHealthy),
                         }}
                       >
                        <CustomText className="text-white text-sm font-bold">
-                       {scan.severity}
+                       {scan.isHealthy? "Healthy": "Sick"}
                        </CustomText>
                       </View>
                     </View>
                     
-                    <CustomText className="text-base text-standard" numberOfLines={1} style={{marginBottom: 8 }}>
+                    {/* <CustomText className="text-base text-standard" numberOfLines={1} style={{marginBottom: 8 }}>
                       {truncateDescription(scan.description)}
-                    </CustomText>
+                    </CustomText> */}
                     
                     <CustomText style={{ fontSize: 14, color: theme.colors.onSurfaceVariant }}>
-                      Scanned: {moment(scan.scanDate).format("MMM D, YYYY")}
+                      Scanned: {moment(new Date()).format("MMM D, YYYY")}
                     </CustomText>
                   </View>
                 </View>

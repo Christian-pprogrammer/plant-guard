@@ -140,12 +140,22 @@ const HomePage = ({ navigation }:any) => {
           qualityPrioritization: "balanced"
         });
         console.log("Photo captured:", photo.path);
-        setImage({
-          uri: "file://"+photo.path,
-          name: photo?.name,
-          type: '.png'
-        })
-        handlePresentModalPress2()
+
+        const imagePath = Platform.OS == 'ios'? photo.path: `file://${photo.path}`;
+
+        setTimeout(() => {
+          ImagePicker.openCropper({
+            mediaType: 'photo',
+            path: imagePath,
+          }).then((image:any)=>{
+              setImage({
+                uri: image?.path,
+                name: photo?.name,
+                type: '.png'
+              })
+          handlePresentModalPress2()
+            })
+          }, 400);
       } catch (error) {
         console.error("Error taking photo:", error);
         Alert.alert("Error", "Failed to capture photo. Please try again.");

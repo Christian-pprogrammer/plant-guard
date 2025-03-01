@@ -33,7 +33,7 @@ import Login from './screens/auth/login.tsx';
 
 function App(): React.JSX.Element {
   const navigationRef: any = useRef<any>();
-  const [initialRoute, setInitialRoute] = useState<any>('HomePage');
+  const [initialRoute, setInitialRoute] = useState<any>('Login');
 
   const changeNavigationBarColorAndroid = () => {
     if (Platform.OS === 'android') {

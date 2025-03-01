@@ -130,7 +130,7 @@ const { height } = Dimensions.get('window');
        <View className='px-[20px] pt-4'>
        <CustomText style={{
   fontFamily: 'EuclidCircularB-Bold'
-}} className='text-standard text-xl mb-3'>{info?.plant || "This is not the plant"}</CustomText>
+}} className='text-standard text-xl mb-3'>{info?.plant || "We couldn't detect this plant, plant detection failed, please try again!"}</CustomText>
        <View style={{flexDirection: 'row',alignItems: 'center'}} className='mb-3'>
         {
           info?.plant && (
@@ -144,18 +144,17 @@ const { height } = Dimensions.get('window');
  style={{
   fontFamily: 'EuclidCircularB-Bold'
 }}
- className={`${info?.isHealthy? 'text-primary' : 'text-red-700'} text-xl`}>{info?.isHealthy? 'Healthy!' : 'Sick!'}!</CustomText>
+ className={`${info?.name?.endsWith('healthy')? 'text-primary' : 'text-red-700'} text-xl`}>{info?.name?.endsWith('healthy')? 'Healthy!' : 'Sick!'}!</CustomText>
   )
 }
         </View>
-
 {
-  !info?.isHeathy && (
+ (info?.plant && !info?.name?.endsWith('healthy')) && (
     <CustomText className='text-body text-base mb-4'>This plant has disease called <CustomText className='font-bold text-base text-primary'>{info?.disease}</CustomText>, this disease has various treatment options including:</CustomText>
   )
 }
     {
-      !info?.isHeathy && (
+     (info?.plant && !info?.name?.endsWith('healthy')) && (
         <CustomText
         style={{
           fontFamily: 'EuclidCircularB-Bold'
@@ -165,7 +164,7 @@ const { height } = Dimensions.get('window');
     }
 
 {
- !info?.isHeathy && (
+ !info?.name?.endsWith('healthy') && (
     <View className='mb-3'>
 {
     info?.treatment?.map((instruction:any)=>{
@@ -187,7 +186,7 @@ const { height } = Dimensions.get('window');
         style={{
           fontFamily: 'EuclidCircularB-Bold'
         }}
-         className='text-xl text-standard mb-3 mt-1'>Prevention measures</CustomText>
+         className='text-xl text-standard mb-3 mt-1'>{info?.name?.endsWith('healthy')? 'Caring measures' : 'Prevention measures'}</CustomText>
       )
     }
 
@@ -220,11 +219,15 @@ info?.prevention_measures?.length>0 && (
             <CustomText className='text-standard text-lg'>New</CustomText>
           </View>
         </TouchableRipple>
-       <View className='flex-1'>
-       <CustomButton classNames={'py-3'} leftIcon={<AntDesign name='sharealt' color={'white'} size={24}/>} title={'Share'} onPress={()=>{
-        sharePlantHealthStatus();
-        }}></CustomButton>
-       </View>
+      {
+        info?.plant && (
+          <View className='flex-1'>
+          <CustomButton classNames={'py-3'} leftIcon={<AntDesign name='sharealt' color={'white'} size={24}/>} title={'Share'} onPress={()=>{
+           sharePlantHealthStatus();
+           }}></CustomButton>
+          </View>
+        )
+      }
       </View>
         </SafeAreaView>
       </KeyboardAvoidingView>

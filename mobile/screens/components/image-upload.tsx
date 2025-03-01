@@ -28,10 +28,11 @@ export default function ImageUpload({onClose, image,navigation}:any){
         setProcessing(true);
     
         // Prepare form data
+        console.log("_image",_image)
         const formData = new FormData();
         formData.append("file", {
           uri: _image.uri,
-          name: _image.name || `photo_${Date.now()}.jpg`,
+          name:  `photo_${Date.now()}.jpg`|| _image?.name,
           type: _image.type || "image/jpeg",
         });
     

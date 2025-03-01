@@ -34,3 +34,4 @@ backend/*.PNG
 backend/model/disease_classifier_model.h5
 backend/dataset/plantGuard_dataset/disease_classifier_model.h5
 backend/dataset/SVMTrain.zip
+backend/.env

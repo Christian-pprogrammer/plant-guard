@@ -1,3 +1,6 @@
+
+*.env
+
 **/plant_guard_env/
 
 **/__pycache__/

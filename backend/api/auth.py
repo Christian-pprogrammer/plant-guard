@@ -12,6 +12,8 @@ load_dotenv()  # Load environment variables
 auth = Blueprint('auth', __name__)
 bcrypt = Bcrypt()
 
+# commented out as password hashing is handled in User model
+
 # Secret key for JWT
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 
